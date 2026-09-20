@@ -3,9 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Estate Studio — สร้างภาพและวิดีโออสังหา</title>
+  <title>Estate Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#0c0b0a;--panel:#161412;--line:#2a2622;--gold:#c9a46a;--gold2:#e8d5a8;--ink:#f4efe6;--muted:#9a9083}
+    *{box-sizing:border-box;margin:0;padding:0}body{font-family:IBM Plex Sans Thai,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+    .glow{position:fixed;inset:0;pointer-events:none;background:radial-gradient(900px 400px at 10% -10%,rgba(201,164,106,.18),transparent 50%)}
+    header{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:22px 28px;border-bottom:1px solid var(--line)}
+    .mark{width:38px;height:38px;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-family:Playfair Display,serif;font-weight:700}
+    .brand{display:flex;gap:12px;align-items:center}.brand h1{font-size:16px;letter-spacing:.08em}.brand span{display:block;color:var(--muted);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+    .wrap{position:relative;z-index:1;display:grid;grid-template-columns:380px 1fr;min-height:calc(100vh - 83px)}
+    @media(max-width:980px){.wrap{grid-template-columns:1fr}}aside{border-right:1px solid var(--line);padding:24px;background:rgba(22,20,18,.7)}
+    label{display:block;font-size:12px;color:var(--muted);margin:14px 0 6px}
+    input,select,textarea{width:100%;background:#1c1916;border:1px solid var(--line);color:var(--ink);padding:10px 12px;border-radius:6px;font:inherit}
+    textarea{min-height:78px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .primary{width:100%;margin-top:20px;padding:13px;background:linear-gradient(180deg,#d4b57a,#b48a46);color:#1a140c;border:0;font-weight:700;cursor:pointer;border-radius:8px}
+    .ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer;font:inherit;font-size:12px}
+    main{padding:24px 28px 48px}.hero{font-family:Playfair Display,serif;font-size:36px;margin-bottom:8px}.sub{color:var(--muted);margin-bottom:24px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tabs .active{border-color:var(--gold);color:var(--gold)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:14px}
+    .card h3{font-size:14px;color:var(--gold);margin-bottom:10px;letter-spacing:.06em;text-transform:uppercase}
+    pre{white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.7}
+    .preview{aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);position:relative;background:#111 url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=70) center/cover}
+    .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(12,10,8,.78));display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+    .tag{font-size:11px;letter-spacing:.2em;color:var(--gold2)}.preview h2{font-family:Playfair Display,serif;font-size:28px}.preview p{color:#ddd4c6;margin-top:4px}
+    .story{width:260px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative;background:#111 url(https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=70) center/cover}
+    .previews{display:flex;gap:16px;flex-wrap:wrap}.previews .preview{flex:1;min-width:280px}.hint{font-size:12px;color:var(--muted);margin-top:8px}.hidden{display:none}
+  </style>
 </head>
 <body>
-<p>placeholder</p>
-</body>
-</html>
+<div class="glow"></div>
+<header>
+  <div class="brand"><div class="mark">E</div><div><h1>ESTATE STUDIO</h1><span>Image & Video Prompt Lab</span></div></div>
+  <div style="color:var(--muted);font-size:12px">สำหรับธุรกิจอสังหาริมทรัพย์</div>
+</header>
+<div class="wrap">
+<aside>
+  <label>ชื่อโครงการ / ทรัพย์</label><input id="name" value="The Reserve Riverside" />
+  <div class="row"><div><label>ประเภท</label><select id="type"><option>คอนโดมิเนียม</option><option>บ้านเดี่ยว</option><option>ทาวน์โฮม</option><option>วิลล่า</option><option>ที่ดิน</option><option>อาคารพาณิชย์</option></select></div>
+  <div><label>สไตล์ภาพ</label><select id="style"><option>Luxury cinematic</option><option>Warm lifestyle</option><option>Modern minimal</option><option>Tropical resort</option><option>Night city glow</option></select></div></div>
+  <label>ทำเล</label><input id="loc" value="ริมแม่น้ำเจ้าพระยา กรุงเทพฯ" />
+  <div class="row"><div><label>ราคา</label><input id="price" value="เริ่ม 8.9 ล้านบาท" /></div><div><label>ขนาด</label><input id="size" value="2 ห้องนอน 75 ตร.ม." /></div></div>
+  <label>จุดขาย (คั่นด้วยจุลภาค)</label><input id="usps" value="วิวแม่น้ำ, สระอินฟินิตี้, ใกล้ BTS, ตกแต่งหรู" />
+  <label>รายละเอียดเพิ่มเติม</label><textarea id="desc">ห้องมุมสูง วิวพระอาทิตย์ตก เฟอร์นิเจอร์บิวท์อินครบ พร้อมอยู่</textarea>
+  <button class="primary" onclick="generate()">สร้างคอนเทนต์ภาพ & วิดีโอ</button>
+  <p class="hint">สร้างพรอมต์ภาพ/วิดีโอ สคริปต์รีล และแคปชัน แล้วนำไปใช้ใน Flux, Midjourney, Veo, Kling, Canva, CapCut</p>
+</aside>
+<main>
+  <p class="hero">สตูดิโอครีเอทีฟอสังหา</p>
+  <p class="sub">กรอกข้อมูลทรัพย์ แล้วได้พรอมต์พร้อมใช้ในคลิกเดียว</p>
+  <div class="tabs">
+    <button class="ghost active" data-tab="preview" onclick="tab(this)">พรีวิว</button>
+    <button class="ghost" data-tab="image" onclick="tab(this)">พรอมต์ภาพ</button>
+    <button class="ghost" data-tab="video" onclick="tab(this)">พรอมต์วิดีโอ</button>
+    <button class="ghost" data-tab="script" onclick="tab(this)">สคริปต์</button>
+    <button class="ghost" data-tab="caption" onclick="tab(this)">แคปชัน</button>
+  </div>
+  <section id="preview">
+    <div class="previews">
+      <div class="preview"><div class="ov"><div class="tag" id="pTag">JUST LISTED</div><h2 id="pName">The Reserve Riverside</h2><p id="pMeta">ริมแม่น้ำเจ้าพระยา · เริ่ม 8.9 ล้านบาท</p></div></div>
+      <div class="story"><div class="ov"><div class="tag">REELS 9:16</div><h2 style="font-size:22px" id="pName2">The Reserve</h2><p id="pUsp">วิวแม่น้ำ · Infinity pool</p></div></div>
+    </div>
+    <p class="hint">พรีวิวเลย์เอาต์โฆษณา — วางทับภาพจริงของทรัพย์ได้</p>
+  </section>
+  <section id="image" class="hidden"></section>
+  <section id="video" class="hidden"></section>
+  <section id="script" class="hidden"></section>
+  <section id="caption" class="hidden"></section>
+</main>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function data(){return{name:$("name").value.trim()||"โครงการ",type:$("type").value,style:$("style").value,loc:$("loc").value.trim(),price:$("price").value.trim(),size:$("size").value.trim(),usps:$("usps").value.trim(),desc:$("desc").value.trim()}}
+function tab(btn){document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");["preview","image","video","script","caption"].forEach(id=>$(id).classList.toggle("hidden",id!==btn.dataset.tab))}
+function card(title,text){return `<div class="card"><h3>${title}</h3><pre>${text}</pre><button class="ghost" style="margin-top:10px" onclick="copyText(this)">คัดลอก</button></div>`}
+function copyText(btn){navigator.clipboard.writeText(btn.parentElement.querySelector("pre").innerText);btn.textContent="คัดลอกแล้ว";setTimeout(()=>btn.textContent="คัดลอก",1200)}
+function generate(){const d=data();$("pName").textContent=d.name;$("pName2").textContent=d.name;$("pMeta").textContent=`${d.loc} · ${d.price}`;$("pUsp").textContent=d.usps.split(",")[0]+" · "+(d.usps.split(",")[1]||d.size);$("pTag").textContent=d.type.toUpperCase();
+const imgHero=`Photorealistic luxury real estate hero photograph of ${d.name}, a ${d.type} in ${d.loc}. ${d.size}. Selling points: ${d.usps}. ${d.desc}. Style: ${d.style}, golden hour, ultra sharp architecture photography, 8k, magazine editorial, no text, no watermark.`;
+const imgInterior=`Photorealistic interior of ${d.name} ${d.type}, ${d.size}, ${d.desc}. Natural light, styled living space, ${d.style}, wide angle 24mm, hospitality photography, no text.`;
+const imgAerial=`Cinematic aerial drone still of ${d.name} in ${d.loc}, twilight city lights, ${d.style}, ultra detailed, no text.`;
+const imgSocial=`Square Instagram listing graphic of ${d.name}, space for price ${d.price}, ${d.style}, high-end Thailand real estate branding.`;
+$("image").innerHTML=card("Hero Exterior — Flux / Midjourney",imgHero)+card("Interior Lifestyle",imgInterior)+card("Aerial / Context",imgAerial)+card("Social Ad Frame",imgSocial);
+const v15=`15-second cinematic listing video of ${d.name}, ${d.type} in ${d.loc}. Shot list: 0-3s aerial, 3-7s facade golden hour, 7-11s interior walk-in, 11-15s balcony + end card. Mood: ${d.style}. Features: ${d.usps}. Last frame price: ${d.price}.`;
+const vReel=`Vertical 9:16 Reels/TikTok tour 20s. Hook in first second. Property: ${d.name}, ${d.size}, ${d.usps}. Style ${d.style}. CTA: นัดชมห้อง.`;
+$("video").innerHTML=card("Veo / Kling / Runway 15s",v15)+card("Reels 9:16",vReel)+card("Night B-roll",`Night cinematic clip of ${d.name} facade and lobby in ${d.loc}, warm interior glow.`);
+$("script").innerHTML=card("สคริปต์รีล 15 วินาที",`0-2วิ: วิวแบบนี้หาได้ไม่กี่ห้อง\n2-6วิ: พาเดินเข้าห้อง ${d.size}\n6-11วิ: จุดขาย ${d.usps}\n11-15วิ: อยู่ ${d.loc} ราคา ${d.price}\nปิด: ทักมานัดชม ${d.name}`)+card("English VO",`Hook: This is the view buyers wait years for.\nWalk through ${d.size} at ${d.name}, ${d.loc}.\n${d.usps}.\nClose: ${d.price}. Book a viewing.`)+card("โทนเสียง","สงบ มั่นใจ หรู / piano+soft bass 90-100BPM / ซับสั้นไม่เกิน 6 คำต่อบรรทัด");
+$("caption").innerHTML=card("IG / TikTok",`${d.name}\n${d.type} ${d.size}\n📍 ${d.loc}\n✨ ${d.usps}\n💰 ${d.price}\n\n${d.desc}\n\nทัก Inbox นัดชมห้อง\n#อสังหา #คอนโด #ขายบ้าน`)+card("Facebook",`ประกาศขาย ${d.name}\nทำเล ${d.loc}\n${d.size} | ${d.price}\nจุดเด่น: ${d.usps}\nสนใจชมทรัพย์ ทักได้เลย`)+card("Line OA",`สนใจ ${d.name} ไหมครับ/คะ\n${d.size} ${d.loc}\nราคา ${d.price}\nส่งคลิปและแปลนให้ดูได้ทันที`);
+tab(document.querySelector('[data-tab="image"]'));}
+</script>
+</body></html>
