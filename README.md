@@ -1,2 +1,2 @@
-# estate-studio
-Web app for generating real estate image and video prompts
+# Estate Studio
+Web app for real estate image and video content prompts.
